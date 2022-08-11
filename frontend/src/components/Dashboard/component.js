@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ErrorPage from "@/pages/Error";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { Button } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -16,7 +17,9 @@ const ErrorContainer = styled.div`
 const Dashboard = (props) => {
   const [isFavoriteBtnActive, setIsFavoriteBtnActive] = useState(false);
 
-  const { addFavorite, favoriteList } = props;
+  const favoriteList = useSelector((state) => state.favoriteList);
+
+  const { addFavorite } = props;
 
   const favoriteHandler = async (row) => {
     setIsFavoriteBtnActive(!isFavoriteBtnActive);
@@ -28,7 +31,7 @@ const Dashboard = (props) => {
     });
   };
 
-  console.log("favoriteList from DASHBOARD", favoriteList);
+  console.log("XXX favoriteList", favoriteList);
 
   return props.fatalError.active ? (
     <ErrorContainer>
@@ -50,22 +53,18 @@ const Dashboard = (props) => {
         const isFavorited = Boolean(favoriteList[row.original.id]);
         return (
           <Button disableElevation>
-            {isFavorited ? (
-              <FavoriteIcon />
-            ) : (
-              <FavoriteBorderIcon onClick={() => favoriteHandler(row)} />
-            )}
+            <FavoriteBorderIcon onClick={() => favoriteHandler(row)} />
           </Button>
         );
       }}
-      muiTableBodyRowProps={({ row }) => {
-        const isFavorited = Boolean(favoriteList[row.original.id]);
-        return {
-          sx: {
-            backgroundColor: isFavorited ? "#FFCCCB" : undefined,
-          },
-        };
-      }}
+      // muiTableBodyRowProps={({ row }) => {
+      //   const isFavorited = Boolean(favoriteList[row.original.id]);
+      //   return {
+      //     sx: {
+      //       backgroundColor: isFavorited ? "#FFCCCB" : undefined,
+      //     },
+      //   };
+      // }}
     />
   );
 };

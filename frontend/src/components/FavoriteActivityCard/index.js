@@ -1,4 +1,5 @@
-import React, { useSelector } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import favoriteListSlice from "@/redux/slices/favoriteList";
 import PropTypes from "prop-types";
 import styled from "styled-components";
@@ -46,14 +47,16 @@ const FavoriteActivityCard = (props) => {
 
   const activityId = props.activity._id;
 
+  const dispatch = useDispatch();
+  const favoriteList = useSelector((state) => state.favoriteList);
+
+  const removeFromFavorites = (payload) =>
+    dispatch(favoriteListSlice.actions.remove(payload));
+
   const handleDiscardFromFavorites = async (id) => {
     await axios.delete(`http://localhost:8000/remove?_id=${id}`);
-    props.onDiscardFromFavorites(props.activity);
+    removeFromFavorites(props.activity);
   };
-
-  console.log("props.activity in Favorite Card", props.activity);
-
-  console.log("favoritelist from FavoriteActivityCard", props.favoriteList);
 
   return (
     <Paper elevation={3}>

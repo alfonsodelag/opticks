@@ -3,7 +3,7 @@ import styled from "styled-components";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useDispatch } from "react-redux";
 import favoriteListSlice from "@/redux/slices/favoriteList";
-import { Button, Input, InputLabel, Select } from "@mui/material";
+import { Button, Input, InputLabel, Select, Typography } from "@mui/material";
 import { DropzoneArea } from "material-ui-dropzone";
 import axios from "axios";
 
@@ -37,6 +37,11 @@ const DropDownLabel = styled(InputLabel)`
 const SpacedButton = styled(Button)`
   && {
     margin-top: 25px;
+  }
+`;
+const FieldRequired = styled(Typography)`
+  && {
+    margin-top: 10px;
   }
 `;
 
@@ -113,7 +118,9 @@ const CreateActivity = () => {
             })
           }
         />
-        <p>{formErrors.activity}</p>
+        <FieldRequired variant="p" color="red">
+          {formErrors.activity}
+        </FieldRequired>
       </LabelAndInputContainer>
       <LabelAndInputContainer>
         <Label>Accesibility</Label>
@@ -129,7 +136,9 @@ const CreateActivity = () => {
           placeholder="Enter activity name"
           value={createdActivity.accessibility || ""}
         />
-        <p>{formErrors.accessibility}</p>
+        <FieldRequired variant="p" color="red">
+          {formErrors.accessibility}
+        </FieldRequired>
       </LabelAndInputContainer>
       <LabelAndInputContainer>
         <DropDownLabel id="imple-select-label">Participants</DropDownLabel>
@@ -150,7 +159,9 @@ const CreateActivity = () => {
           <MenuItem value={7}>7</MenuItem>
           <MenuItem value={8}>8</MenuItem>
         </Select>
-        <p>{formErrors.participants}</p>
+        <FieldRequired variant="p" color="red">
+          {formErrors.participants}
+        </FieldRequired>
       </LabelAndInputContainer>
       <LabelAndInputContainer>
         <DropDownLabel id="imple-select-label">Type</DropDownLabel>
@@ -187,7 +198,9 @@ const CreateActivity = () => {
           placeholder="Enter activity name"
           value={createdActivity.price || ""}
         />
-        <p>{formErrors.price}</p>
+        <FieldRequired variant="p" color="red">
+          {formErrors.price}
+        </FieldRequired>
       </LabelAndInputContainer>
       <DropzoneArea
         acceptedFiles={["image/*"]}

@@ -31,8 +31,6 @@ const Dashboard = (props) => {
     });
   };
 
-  console.log("XXX favoriteList", favoriteList);
-
   return props.fatalError.active ? (
     <ErrorContainer>
       <ErrorPage {...props.fatalError} />
@@ -57,14 +55,6 @@ const Dashboard = (props) => {
           </Button>
         );
       }}
-      // muiTableBodyRowProps={({ row }) => {
-      //   const isFavorited = Boolean(favoriteList[row.original.id]);
-      //   return {
-      //     sx: {
-      //       backgroundColor: isFavorited ? "#FFCCCB" : undefined,
-      //     },
-      //   };
-      // }}
     />
   );
 };

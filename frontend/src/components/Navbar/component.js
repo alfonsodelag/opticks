@@ -66,7 +66,7 @@ const Navbar = ({
   const getFavoritedActivities = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/createdfavoritelist"
+        "https://opticksbackend.herokuapp.com/api/favorite-activities"
       );
       setFavoriteActivities(response.data);
     } catch (error) {

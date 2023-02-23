@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const FavoriteActivity = require("./models/favoriteactivity");
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 // DB Connection
 app.use(express.json());
@@ -24,7 +24,7 @@ mongoose.connect(
   }
 );
 
-app.post("/post", async (req, res) => {
+app.post("/api/favorite-activities", async (req, res) => {
   const data = new FavoriteActivity({
     activity: req.body.activity.activity,
     accessibility: req.body.activity.accessibility,
@@ -38,14 +38,13 @@ app.post("/post", async (req, res) => {
   res.json(val);
 });
 
-app.get("/createdfavoritelist", async (req, res) => {
+app.get("/api/favorite-activities", async (req, res) => {
   const activitiesList = await FavoriteActivity.find();
   res.send(activitiesList);
 });
 
-app.delete("/remove", async (req, res) => {
-  const deleteOne = await FavoriteActivity.deleteOne({ _id: req.query._id });
-  console.log("req: ", req);
+app.delete("/api/favorite-activities/:id", async (req, res) => {
+  const deleteOne = await FavoriteActivity.deleteOne({ _id: req.params.id });
   res.send(deleteOne);
 });
 

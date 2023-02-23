@@ -23,9 +23,12 @@ const Dashboard = (props) => {
 
   const favoriteHandler = async (row) => {
     setIsFavoriteBtnActive(!isFavoriteBtnActive);
-    await axios.post("http://localhost:8000/post", {
-      activity: row.original,
-    });
+    await axios.post(
+      "https://opticksbackend.herokuapp.com/api/favorite-activities",
+      {
+        activity: row.original,
+      }
+    );
     addFavorite({
       ...row.original,
     });

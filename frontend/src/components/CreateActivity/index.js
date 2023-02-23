@@ -77,9 +77,12 @@ const CreateActivity = () => {
   const saveActivity = async () => {
     setIsSubmit(true);
     if (Object.keys(formErrors).length === 0) {
-      const response = await axios.post("http://localhost:8000/post", {
-        activity: createdActivity,
-      });
+      const response = await axios.post(
+        "https://opticksbackend.herokuapp.com/api/favorite-activities",
+        {
+          activity: createdActivity,
+        }
+      );
       addFavorite({ ...response.data, createdActivity });
     }
   };

@@ -54,7 +54,9 @@ const FavoriteActivityCard = (props) => {
     dispatch(favoriteListSlice.actions.remove(payload));
 
   const handleDiscardFromFavorites = async (id) => {
-    await axios.delete(`http://localhost:8000/remove?_id=${id}`);
+    await axios.delete(
+      `https://opticksbackend.herokuapp.com/api/favorite-activities/${id}`
+    );
     removeFromFavorites(props.activity);
   };
 
